@@ -8,8 +8,19 @@
 import SwiftUI
 
 @MainActor class UserState : ObservableObject{
-    @Published var value = "Enemy"
+    @Published var value = ""
     @Published var health = 0
+    @Published var CountD1 = 0
+    @Published var CountD2 = 0
+    @Published var CountD3 = 0
+    @Published var CountD4 = 0
+    @Published var CountD5 = 0
+    @Published var CountD6 = 0
+    @Published var CountD7 = 0
+    @Published var CountD8 = 0
+    @Published var CountD9 = 0
+    @Published var CountD10 = 0
+    
 }
 
 struct ContentView: View {
