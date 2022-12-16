@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct NewGame: View {
+    @EnvironmentObject var userState : UserState
+    @Binding var rootPresenting : Bool
     var body: some View {
         VStack{
         Text("ALIEN TREASURE HUNT")
             Text("Which door would ou like to open ? ")
             VStack{
                 HStack{
-                    NavigationLink(destination : Door1()){
+                    NavigationLink(destination : Door1( rootPresenting: $rootPresenting)){
                         VStack{
                             Image(systemName: "square.fill").resizable().frame(width: 50, height: 50)
                         Text("Door 1")
@@ -79,15 +81,11 @@ struct NewGame: View {
                         VStack{
                                     Image(systemName: "square.fill").resizable().frame(width: 50, height: 50)
                         Text("Door 10")}
-                    }                }
+                    }
+                    
+                }
             }
         }//Vstack ends here
         
-    }
-}
-
-struct NewGame_Previews: PreviewProvider {
-    static var previews: some View {
-        NewGame()
     }
 }

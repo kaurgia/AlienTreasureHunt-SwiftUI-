@@ -11,7 +11,7 @@ import SwiftUI
 struct AlienTreasureHuntApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(UserState())
         }
     }
 }

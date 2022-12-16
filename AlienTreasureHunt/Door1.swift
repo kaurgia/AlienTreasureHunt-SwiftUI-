@@ -8,13 +8,45 @@
 import SwiftUI
 
 struct Door1: View {
+  
+    @State var randomState : String = ""
+    @State var money : Int = 0
+    @State var damage : Int = 0
+    @EnvironmentObject var userState : UserState
+    @Binding var rootPresenting : Bool
+    let options = ["Treasure", "ENEMY"]
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        VStack{
+        Text("You opened Door#1")
+            Text(randomState)
+            Text(" Health is \(userState.health)")
+            if(userState.health<=0){
+                Quit(rootPresenting: $rootPresenting)
+            }
+            
+        }.onAppear{
+            randomState = self.options.randomElement() ?? ""
+            if(randomState=="Treasure"){
+                 money = Int.random(in: 2...25)
+                print("random number generated is : \(money)")
+                userState.health += money
+                print("Total health after adding \(money) is : \(userState.health)")
+                
+            }else{
+               damage = Int.random(in: 50...500)
+                print("random number generated is : \(damage)")
+                userState.health -= damage
+                print("Total health after subtracting \(damage) is : \(userState.health)")
+                
+                
+            }
+        }
     }
 }
 
 struct Door1_Previews: PreviewProvider {
     static var previews: some View {
-        Door1()
+        Door2().environmentObject(UserState())
     }
 }

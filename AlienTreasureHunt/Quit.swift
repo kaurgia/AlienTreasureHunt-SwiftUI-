@@ -8,13 +8,21 @@
 import SwiftUI
 
 struct Quit: View {
+    
+    @Binding var rootPresenting : Bool
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Text("you loose the game lose")
+            Button(action:{
+                rootPresenting = false
+                
+            }, label : {
+                Text("back")
+            })
+        }
+        
     }
 }
 
-struct Quit_Previews: PreviewProvider {
-    static var previews: some View {
-        Quit()
-    }
-}
+
