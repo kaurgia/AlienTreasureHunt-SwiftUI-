@@ -9,7 +9,8 @@ import SwiftUI
 
 @MainActor class UserState : ObservableObject{
     @Published var value = ""
-    @Published var health = 0
+    @Published var money = 0
+    @Published var health = 70
     @Published var CountD1 = 0
     @Published var CountD2 = 0
     @Published var CountD3 = 0

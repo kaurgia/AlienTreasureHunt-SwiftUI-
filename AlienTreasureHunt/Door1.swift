@@ -10,7 +10,7 @@ import SwiftUI
 struct Door1: View {
   
     @State var randomState : String = "Treasure"
-    @State var money : Int = 0
+    @State var treasureMoney : Int = 0
     @State var damage : Int = 0
     @EnvironmentObject var userState : UserState
     @Binding var rootPresenting : Bool
@@ -19,31 +19,38 @@ struct Door1: View {
     var body: some View {
         
         VStack{
-        Text("You opened Door#1")
-            Text(randomState)
-            Text(" Health is \(userState.health)")
+            Text("You opened Door#1").frame(width: 300, height: 300, alignment: .top)
+            if(randomState=="Treasure"){
+                Text("You collected \(treasureMoney) gold!!").frame(width: 300, height: 50, alignment: .center)
+                Text(" Total Treasure collected so far : \(userState.money)").frame(width: 300, height:50, alignment: .center)
+                
+            }else{
+                Text("You encountered an Alien (\(randomState))").frame(width: 300, height: 300, alignment: .center)
+                Text(" Health reduced by : \(damage)").frame(width: 300, height: 50, alignment: .center)
+                     
+                Text(" New Health : \(userState.health)").frame(width: 300, height: 50, alignment: .center)
+                     
+                     }
+            
             if(userState.health <= 0){
                 Quit(rootPresenting: $rootPresenting)
             }
-            if(
-                userState.CountD1==0&&userState.CountD2==0&&userState.CountD3==0&&userState.CountD4==0&&userState.CountD5==0&&userState.CountD6==0&&userState.CountD7==0&&userState.CountD8==0&&userState.CountD9==0&&userState.CountD10==0){
-                Quit(rootPresenting: $rootPresenting)
-                
-            }
+            
             
         }.onAppear{
             randomState = self.options.randomElement() ?? ""
             if(randomState=="Treasure"){
-                 money = Int.random(in: 2...25)
-                print("random number generated is : \(money)")
-                userState.health += money
-                print("Total health after adding \(money) is : \(userState.health)")
+                treasureMoney = Int.random(in: 50...500)
+                print("random number generated is : \(treasureMoney)")
+                userState.money += treasureMoney
+                print("Total health after adding \(treasureMoney) is : \(userState.money)")
                 
-            }else{
-               damage = Int.random(in: 50...500)
+            }
+               if(randomState=="ENEMY"){
+               damage = Int.random(in: 2...25)
                 print("random number generated is : \(damage)")
-                while(damage>100){
-                    damage = Int.random(in: 50...500)
+                while(userState.health<100){
+                    damage = Int.random(in: 2...25)
                     
                 }
                 print("random number generated after checking value of damage: \(damage)")

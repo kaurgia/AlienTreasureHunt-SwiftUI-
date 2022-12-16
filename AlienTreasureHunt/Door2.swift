@@ -9,18 +9,17 @@ import SwiftUI
 
 struct Door2: View {
   
-    @State var randomState : String = ""
+    @State var randomState : String = "Treasure"
     @State var money : Int = 0
     @State var damage : Int = 0
     @EnvironmentObject var userState : UserState
     @Binding var rootPresenting : Bool
 
-    
     let options = ["Treasure", "ENEMY"]
     var body: some View {
         
         VStack{
-        Text("You opened Door#2")
+            Text("You opened Door#2").frame(width: 300, height: 300, alignment: .top)
             Text(randomState)
             Text(" Health is \(userState.health)")
             if(userState.health <= 0){
@@ -35,16 +34,16 @@ struct Door2: View {
         }.onAppear{
             randomState = self.options.randomElement() ?? ""
             if(randomState=="Treasure"){
-                 money = Int.random(in: 2...25)
+                 money = Int.random(in: 50...500)
                 print("random number generated is : \(money)")
-                userState.health += money
-                print("Total health after adding \(money) is : \(userState.health)")
+                userState.money += money
+                print("Total health after adding \(money) is : \(userState.money)")
                 
             }else{
-               damage = Int.random(in: 50...500)
+               damage = Int.random(in: 2...25)
                 print("random number generated is : \(damage)")
-                while(damage>100){
-                    damage = Int.random(in: 50...500)
+                while(userState.health>100){
+                    damage = Int.random(in: 2...25)
                     
                 }
                 print("random number generated after checking value of damage: \(damage)")
@@ -58,5 +57,3 @@ struct Door2: View {
         }
     }
 }
-
-
